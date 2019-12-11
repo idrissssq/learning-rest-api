@@ -26,13 +26,13 @@ router.get("/:postID", async (req, res) => {
 
 // SUBMIT A POST
 router.post("/", async (req, res) => {
-  const post = new Post({
+  const newPost = new Post({
     title: req.body.title,
     description: req.body.description
   });
 
   try {
-    const savedPost = await post.save();
+    const savedPost = await newPost.save();
     res.json(savedPost);
   } catch (err) {
     res.json({ message: err });
@@ -63,7 +63,7 @@ router.patch("/:postID", async (req, res) => {
       { _id: req.params.postID },
       { $set: { title: req.body.title } }
     );
-    
+
     res.json(updatedPost);
   } catch (err) {
     res.json({ message: err });
